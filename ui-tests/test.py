@@ -45,6 +45,16 @@ def login_page(browser, server, username, password):
     login_button.click()
 
 
+def spaces_page(browser, server, username):
+    '''Go to the Spaces page with list of available Spaces.'''
+    url = urljoin(server, username+"/_spaces")
+    browser.visit(url)
+    space_names = get_all_existing_space_names(browser)
+    new_space_name = generate_unique_space_name(space_names)
+
+    time.sleep(SLEEP_BETWEEN_PAGES)
+
+
 def run_tests(engine, server, username, password):
     with Browser(engine) as browser:
         front_page(browser, server)
